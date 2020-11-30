@@ -6,7 +6,7 @@ SELECT *
 FROM Customer 
 WHERE Country = "Brazil";
 
-SELECT Customer.FirstName, Invoice.InvoiceId, Invoice.InvoiceDate, Invoice.BillingCountry
+SELECT Customer.FirstName || ' ' || Customer.LastName, Invoice.InvoiceId, Invoice.InvoiceDate, Invoice.BillingCountry
 FROM Invoice 
 INNER JOIN Customer ON Invoice.CustomerId=Customer.CustomerId
 WHERE BillingCountry = "Brazil";
@@ -18,8 +18,9 @@ SELECT BillingCountry FROM Invoice;
 SELECT *, Employee.FirstName, Employee.LastName 
 FROM Invoice
 INNER JOIN Employee ON Employee.EmployeeId=Invoice.InvoiceId
-WHERE Employee.Title LIKE "Sales%"
+WHERE Employee.Title LIKE "Sales%";
 
-SELECT Invoice.Total, Customer.FirstName, Customer.LastName, Invoice.BillingCountry
+SELECT Invoice.Total, Customer.FirstName || ' ' || Customer.LastName, Invoice.BillingCountry
 FROM Invoice
-INNER JOIN Customer ON Invoice.CustomerId=Customer.CustomerId;
+INNER JOIN Customer ON Invoice.CustomerId=Customer.CustomerId
+INNER JOIN Employee ON Employee.EmployeeId=Customer.SupportRepId;
